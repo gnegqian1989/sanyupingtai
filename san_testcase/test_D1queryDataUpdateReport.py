@@ -17,11 +17,11 @@ class MyTest(unittest.TestCase):
     def tearDown(self):
         print('end test')
         pass
-class test_queryType(MyTest):
-    '''测试接口：1.	类别查询'''
+class test_queryDataUpdateReport(MyTest):
+    '''测试接口：1.	表数据更新统计'''
 
-    def test_queryType(self):
-        '''测试用例1：1.	类别查询'''
+    def test_queryDataUpdateReport(self):
+        '''测试用例1：1.	表数据更新统计'''
 
         #        ==================post请求==================================
         # 登录验证获取cookies
@@ -41,22 +41,22 @@ class test_queryType(MyTest):
 
         cookies = self.r.cookies
 
-        #        ==================post请求==================================
+        #        ==================get请求==================================
 
-        self.url = (config.TestPlanUrl) + "/affairs/forcast/message/queryType.do?"
-        self.data = {
-            "lx": "01",
+        self.url =(config.TestPlanUrl) +"/affairs/data/home/queryDataUpdateReport.do?"
 
+        print(self.url)
+        self.headers = {"Content-Type":"application/json"}
 
-        }
-        self.headers = {"Content-Type": "application/json"}
-        self.r = requests.post(url=self.url, json=self.data, headers=self.headers,cookies=cookies)
+        self.r = requests.get(url = self.url,cookies=cookies)
+        # return self.r.json()
+
 
         #=============================================================
         print(self.r)
         print(self.r.text)
         print(self.r.status_code)
-        self.assertIn("电信诈骗",self.r.text)
+        self.assertIn("200",self.r.text)
 
 if __name__ =="__main__":
         unittest.main()

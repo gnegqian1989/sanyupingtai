@@ -17,11 +17,11 @@ class MyTest(unittest.TestCase):
     def tearDown(self):
         print('end test')
         pass
-class test_queryType(MyTest):
-    '''测试接口：1.	类别查询'''
+class test_queryOldData(MyTest):
+    '''测试接口：1.	1.	2.	选择历史时间，列表数据'''
 
-    def test_queryType(self):
-        '''测试用例1：1.	类别查询'''
+    def test_queryOldData(self):
+        '''测试用例1：1.	1.	2.	选择历史时间，列表数据'''
 
         #        ==================post请求==================================
         # 登录验证获取cookies
@@ -41,22 +41,27 @@ class test_queryType(MyTest):
 
         cookies = self.r.cookies
 
-        #        ==================post请求==================================
+        #        ==================get请求==================================
 
-        self.url = (config.TestPlanUrl) + "/affairs/forcast/message/queryType.do?"
-        self.data = {
-            "lx": "01",
+        self.url =(config.TestPlanUrl) +"/affairs/analysis/forcast/queryOldData.do?"\
+                                        "dtDate=2018-11-23&" \
+                                        "strCode=01030301&" \
+                                        "timeDate=night&" \
+                                        "strBranchCodes=120104000000&"
 
 
-        }
-        self.headers = {"Content-Type": "application/json"}
-        self.r = requests.post(url=self.url, json=self.data, headers=self.headers,cookies=cookies)
+        print(self.url)
+        self.headers = {"Content-Type":"application/json"}
+
+        self.r = requests.get(url = self.url,cookies=cookies)
+        # return self.r.json()
+
 
         #=============================================================
         print(self.r)
         print(self.r.text)
         print(self.r.status_code)
-        self.assertIn("电信诈骗",self.r.text)
+        self.assertIn("200",self.r.text)
 
 if __name__ =="__main__":
         unittest.main()

@@ -17,11 +17,11 @@ class MyTest(unittest.TestCase):
     def tearDown(self):
         print('end test')
         pass
-class test_queryType(MyTest):
-    '''测试接口：1.	类别查询'''
+class test_queryLossReport(MyTest):
+    '''测试接口：1.	电电信诈骗损失报价统计'''
 
-    def test_queryType(self):
-        '''测试用例1：1.	类别查询'''
+    def test_queryLossReport(self):
+        '''测试用例1：1.	电信诈骗损失报价统计'''
 
         #        ==================post请求==================================
         # 登录验证获取cookies
@@ -43,9 +43,11 @@ class test_queryType(MyTest):
 
         #        ==================post请求==================================
 
-        self.url = (config.TestPlanUrl) + "/affairs/forcast/message/queryType.do?"
+        self.url = (config.TestPlanUrl) + "/affairs/swindle/swindle/queryLossReport.do?"
         self.data = {
-            "lx": "01",
+
+            "ajxl": "电信诈骗:01",
+            "gxpcsbm": "120103410000",
 
 
         }
@@ -56,7 +58,7 @@ class test_queryType(MyTest):
         print(self.r)
         print(self.r.text)
         print(self.r.status_code)
-        self.assertIn("电信诈骗",self.r.text)
+        self.assertIn("200",self.r.text)
 
 if __name__ =="__main__":
         unittest.main()

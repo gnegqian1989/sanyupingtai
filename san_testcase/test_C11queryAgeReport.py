@@ -17,11 +17,11 @@ class MyTest(unittest.TestCase):
     def tearDown(self):
         print('end test')
         pass
-class test_queryBKRYList(MyTest):
-    '''测试接口：1.	布控人员列表'''
+class test_queryAgeReport(MyTest):
+    '''测试接口：1.	受损群体年龄统计'''
 
-    def test_queryBKRYList(self):
-        '''测试用例1：1.	布控人员列表'''
+    def test_queryAgeReport(self):
+        '''测试用例1：1.	受损群体年龄统计'''
 
         #        ==================post请求==================================
         # 登录验证获取cookies
@@ -41,16 +41,18 @@ class test_queryBKRYList(MyTest):
 
         cookies = self.r.cookies
 
-        #        ==================get请求==================================
+        #        ==================post请求==================================
 
-        self.url =(config.TestPlanUrl) +"/affairs/criminal/criminal/queryBKRYList.do?"
+        self.url = (config.TestPlanUrl) + "/affairs/losscolony/losscolony/queryAgeReport.do?"
+        self.data = {
 
-        print(self.url)
-        self.headers = {"Content-Type":"application/json"}
+            "ajxl": "电信诈骗:01",
+            "gxpcsbm": "120103410000",
 
-        self.r = requests.get(url = self.url,cookies=cookies)
-        # return self.r.json()
 
+        }
+        self.headers = {"Content-Type": "application/json"}
+        self.r = requests.post(url=self.url, json=self.data, headers=self.headers,cookies=cookies)
 
         #=============================================================
         print(self.r)

@@ -17,11 +17,11 @@ class MyTest(unittest.TestCase):
     def tearDown(self):
         print('end test')
         pass
-class test_queryType(MyTest):
-    '''测试接口：1.	类别查询'''
+class test_queryTypeInfo(MyTest):
+    '''测试接口：1.	类别描述查询'''
 
-    def test_queryType(self):
-        '''测试用例1：1.	类别查询'''
+    def test_queryTypeInfo(self):
+        '''测试用例1：1.	类别描述查询'''
 
         #        ==================post请求==================================
         # 登录验证获取cookies
@@ -43,9 +43,11 @@ class test_queryType(MyTest):
 
         #        ==================post请求==================================
 
-        self.url = (config.TestPlanUrl) + "/affairs/forcast/message/queryType.do?"
+        self.url = (config.TestPlanUrl) + "/affairs/forcast/message/queryTypeInfo.do?"
         self.data = {
-            "lx": "01",
+            "ajlbbm": "1",
+            "ajxl": "电信诈骗:01",
+            "pcsbm": "120103410000",
 
 
         }
